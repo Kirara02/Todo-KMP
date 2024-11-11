@@ -38,9 +38,11 @@ kotlin {
         val desktopMain by getting
         
         androidMain.dependencies {
+            implementation(compose.ui)
             implementation(compose.preview)
             implementation(libs.androidx.activity.compose)
             implementation(libs.sqldelight.android.driver)
+            implementation(libs.koin.android)
         }
         iosMain.dependencies {
             implementation(libs.sqldelight.native.driver)
@@ -55,6 +57,7 @@ kotlin {
             implementation(libs.androidx.lifecycle.viewmodel)
             implementation(libs.androidx.lifecycle.runtime.compose)
             implementation(libs.sqldelight.coroutines.extensions)
+            implementation(libs.koin.compose)
         }
         desktopMain.dependencies {
             implementation(compose.desktop.currentOs)
@@ -74,6 +77,12 @@ android {
         targetSdk = libs.versions.android.targetSdk.get().toInt()
         versionCode = 1
         versionName = "1.0"
+    }
+    buildFeatures {
+        compose = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = libs.versions.compose.compiler.get()
     }
     packaging {
         resources {
@@ -107,3 +116,12 @@ compose.desktop {
     }
 }
 
+sqldelight {
+    databases {
+        create("Database") {
+            packageName.set("org.kirara.kmp_todo")
+        }
+    }
+
+    linkSqlite.set(true)
+}
