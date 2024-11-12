@@ -1,0 +1,8 @@
+package org.kirara.kmp_todo.domain.model
+
+data class TodoEntity(
+    val id: Long = 0,
+    val title: String,
+    val subtitle: String,
+    val done: Boolean = false
+)

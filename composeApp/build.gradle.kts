@@ -102,6 +102,7 @@ android {
 
 dependencies {
     debugImplementation(compose.uiTooling)
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-core:1.8.1")
 }
 
 compose.desktop {
